@@ -9,7 +9,10 @@ import { useSession } from "./context/auth";
 export default function SignIn() {
   const [isVisible, setIsVisible] = useState(false);
 
-  const { signIn } = useSession();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const { signIn, isLoading } = useSession();
 
   return (
     <Flex flex={1} justify="center" align="center" padding="4">
@@ -18,6 +21,8 @@ export default function SignIn() {
         ContactApp
       </Text>
       <Input
+        value={email}
+        onChangeText={setEmail}
         mb={4}
         InputLeftElement={
           <Icon
@@ -27,9 +32,12 @@ export default function SignIn() {
             color="muted.400"
           />
         }
+        autoCapitalize="none"
         placeholder="E-mail"
       />
       <Input
+        value={password}
+        onChangeText={setPassword}
         mb={4}
         type={isVisible ? "text" : "password"}
         InputRightElement={
@@ -49,10 +57,21 @@ export default function SignIn() {
         placeholder="Senha"
       />
 
-      <Button w="100%" mb={4} onPress={signIn}>
+      <Button
+        isLoading={isLoading}
+        disabled={isLoading}
+        w="100%"
+        mb={4}
+        onPress={() => signIn({ email, password })}
+      >
         Entrar
       </Button>
-      <Button w="100%" variant="link" onPress={() => router.push("/sign-up")}>
+      <Button
+        disabled={isLoading}
+        w="100%"
+        variant="link"
+        onPress={() => router.push("/sign-up")}
+      >
         Criar conta
       </Button>
     </Flex>

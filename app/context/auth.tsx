@@ -1,19 +1,28 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { router } from "expo-router";
 
-import { useStorageState } from "../hooks/useStorageState";
+import { firebaseAuth } from "@/firebaseConfig";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+
+type AuthParams = {
+  email: string;
+  password: string;
+};
 
 type AuthContextType = {
-  signIn: () => void;
+  signIn: ({ email, password }: AuthParams) => void;
+  signUp: ({ email, password }: AuthParams) => void;
   signOut: () => void;
-  session?: string | null;
   isLoading: boolean;
 };
 
 const AuthContext = createContext<AuthContextType>({
   signIn: () => null,
+  signUp: () => null,
   signOut: () => null,
-  session: null,
   isLoading: false,
 });
 
@@ -30,24 +39,52 @@ export function useSession() {
 }
 
 export function SessionProvider(props: React.PropsWithChildren) {
-  const [[isLoading, session], setSession] = useStorageState("session");
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSignIn = () => {
-    setSession("xxx");
+  firebaseAuth.onAuthStateChanged((user) => {
+    if (!user) {
+      router.replace("/sign-in");
+    }
+  });
 
-    router.replace("/");
+  const handleSignIn = async ({ email, password }: AuthParams) => {
+    setIsLoading(true);
+
+    try {
+      await signInWithEmailAndPassword(firebaseAuth, email, password);
+
+      router.replace("/");
+    } catch (e) {
+      console.error(e);
+    }
+
+    setIsLoading(false);
+  };
+
+  const handleSignUp = async ({ email, password }: AuthParams) => {
+    setIsLoading(true);
+
+    try {
+      await createUserWithEmailAndPassword(firebaseAuth, email, password);
+
+      router.replace("/");
+    } catch (e) {
+      console.error(e);
+    }
+
+    setIsLoading(false);
   };
 
   const handleSignOut = () => {
-    setSession(null);
+    firebaseAuth.signOut();
   };
 
   return (
     <AuthContext.Provider
       value={{
         signIn: handleSignIn,
+        signUp: handleSignUp,
         signOut: handleSignOut,
-        session,
         isLoading,
       }}
     >
