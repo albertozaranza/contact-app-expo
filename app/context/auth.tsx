@@ -1,4 +1,5 @@
 import { createContext, useContext } from "react";
+import { router } from "expo-router";
 
 import { useStorageState } from "../hooks/useStorageState";
 
@@ -31,16 +32,21 @@ export function useSession() {
 export function SessionProvider(props: React.PropsWithChildren) {
   const [[isLoading, session], setSession] = useStorageState("session");
 
+  const handleSignIn = () => {
+    setSession("xxx");
+
+    router.replace("/");
+  };
+
+  const handleSignOut = () => {
+    setSession(null);
+  };
+
   return (
     <AuthContext.Provider
       value={{
-        signIn: () => {
-          // Perform sign-in logic here
-          setSession("xxx");
-        },
-        signOut: () => {
-          setSession(null);
-        },
+        signIn: handleSignIn,
+        signOut: handleSignOut,
         session,
         isLoading,
       }}

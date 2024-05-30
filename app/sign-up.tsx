@@ -6,7 +6,7 @@ import { Flex, Button, Input, Icon, Text } from "native-base";
 
 import { useSession } from "./context/auth";
 
-export default function SignIn() {
+export default function SignUp() {
   const [isVisible, setIsVisible] = useState(false);
 
   const { signIn } = useSession();
@@ -48,12 +48,31 @@ export default function SignIn() {
         }
         placeholder="Senha"
       />
+      <Input
+        mb={4}
+        type={isVisible ? "text" : "password"}
+        InputRightElement={
+          <Pressable onPress={() => setIsVisible(!isVisible)}>
+            <Icon
+              as={
+                <MaterialIcons
+                  name={isVisible ? "visibility" : "visibility-off"}
+                />
+              }
+              size={5}
+              mr="2"
+              color="muted.400"
+            />
+          </Pressable>
+        }
+        placeholder="Confirmar senha"
+      />
 
-      <Button w="100%" mb={4} onPress={signIn}>
-        Entrar
-      </Button>
-      <Button w="100%" variant="link" onPress={() => router.push("/sign-up")}>
+      <Button w="100%" mb={4} onPress={() => {}}>
         Criar conta
+      </Button>
+      <Button w="100%" variant="link" onPress={() => router.back()}>
+        Voltar
       </Button>
     </Flex>
   );
