@@ -10,6 +10,7 @@ export default function AppLayout() {
   return (
     <Stack
       screenOptions={{
+        headerTitle: "Contatos",
         headerRight: () => (
           <IconButton
             onPress={signOut}

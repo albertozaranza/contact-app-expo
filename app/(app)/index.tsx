@@ -1,9 +1,43 @@
+import { useEffect } from "react";
 import { Text, View } from "react-native";
-
-import { useSession } from "../context/auth";
+import { getDatabase, ref, child, get, set } from "firebase/database";
+import { firebaseAuth } from "@/firebaseConfig";
+import { Button } from "native-base";
 
 export default function Home() {
-  const { signOut } = useSession();
+  const writeUserData = () => {
+    const db = getDatabase();
+
+    if (firebaseAuth.currentUser?.email) {
+      set(ref(db, `contacts/${btoa(firebaseAuth.currentUser.email)}`), {
+        username: "contato",
+      });
+    }
+  };
+
+  const handleRealTimeDatabaseData = async () => {
+    const dbRef = ref(getDatabase());
+
+    if (firebaseAuth.currentUser?.email) {
+      try {
+        const snapshot = await get(
+          child(dbRef, `contacts/${btoa(firebaseAuth.currentUser.email)}`)
+        );
+
+        if (snapshot.exists()) {
+          console.log(snapshot.val());
+        } else {
+          console.log("No data available");
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    }
+  };
+
+  useEffect(() => {
+    handleRealTimeDatabaseData();
+  }, []);
 
   return (
     <View
@@ -14,7 +48,7 @@ export default function Home() {
         backgroundColor: "#ccc",
       }}
     >
-      <Text>HOME</Text>
+      <Button onPress={writeUserData}>Criar contato</Button>
     </View>
   );
 }
