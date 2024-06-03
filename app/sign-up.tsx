@@ -11,6 +11,7 @@ export default function SignUp() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const { signUp, isLoading } = useSession();
 
@@ -54,9 +55,12 @@ export default function SignUp() {
             />
           </Pressable>
         }
+        autoCapitalize="none"
         placeholder="Senha"
       />
       <Input
+        value={confirmPassword}
+        onChangeText={setConfirmPassword}
         mb={4}
         type={isVisible ? "text" : "password"}
         InputRightElement={
@@ -73,6 +77,7 @@ export default function SignUp() {
             />
           </Pressable>
         }
+        autoCapitalize="none"
         placeholder="Confirmar senha"
       />
 
@@ -81,7 +86,7 @@ export default function SignUp() {
         isLoading={isLoading}
         w="100%"
         mb={4}
-        onPress={() => signUp({ email, password })}
+        onPress={() => signUp({ email, password, confirmPassword })}
       >
         Criar conta
       </Button>

@@ -1,4 +1,5 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
+import { Alert } from "react-native";
 import { router } from "expo-router";
 
 import { firebaseAuth } from "@/firebaseConfig";
@@ -10,11 +11,12 @@ import {
 type AuthParams = {
   email: string;
   password: string;
+  confirmPassword?: string;
 };
 
 type AuthContextType = {
   signIn: ({ email, password }: AuthParams) => void;
-  signUp: ({ email, password }: AuthParams) => void;
+  signUp: ({ email, password, confirmPassword }: AuthParams) => void;
   signOut: () => void;
   isLoading: boolean;
 };
@@ -61,7 +63,16 @@ export function SessionProvider(props: React.PropsWithChildren) {
     setIsLoading(false);
   };
 
-  const handleSignUp = async ({ email, password }: AuthParams) => {
+  const handleSignUp = async ({
+    email,
+    password,
+    confirmPassword,
+  }: AuthParams) => {
+    if (email.length === 0) return Alert.alert("Erro!", "Informe o email");
+    if (password.length === 0) return Alert.alert("Erro!", "Informe a senha");
+    if (password !== confirmPassword)
+      return Alert.alert("Erro!", "As senhas precisam ser iguais");
+
     setIsLoading(true);
 
     try {

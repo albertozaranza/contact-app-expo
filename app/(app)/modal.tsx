@@ -29,7 +29,7 @@ export default function Modal() {
         <Text my={3}>Nome</Text>
         <Input value={name} onChangeText={setName} />
         <Text my={3}>Email</Text>
-        <Input value={email} onChangeText={setEmail} />
+        <Input value={email} onChangeText={setEmail} autoCapitalize="none" />
       </Flex>
       <Button.Group space={2} padding={4}>
         <Button

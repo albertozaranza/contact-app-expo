@@ -2,12 +2,12 @@ import { useLayoutEffect } from "react";
 import { ActivityIndicator, Text } from "react-native";
 import { Flex, Fab, Icon, SectionList, Divider } from "native-base";
 import { AntDesign } from "@expo/vector-icons";
+import { router } from "expo-router";
 
-import useContacts from "./hooks/useContacts";
 import ItemList from "./components/ItemList";
 import ItemHeader from "./components/ItemHeader";
-import { router } from "expo-router";
-import { Contact } from "./@types/contact";
+
+import useContacts from "./hooks/useContacts";
 
 export default function Home() {
   const { sections, isLoading, getContacts } = useContacts();
@@ -15,6 +15,8 @@ export default function Home() {
   useLayoutEffect(() => {
     getContacts();
   }, []);
+
+  console.log(sections);
 
   if (isLoading)
     return (
@@ -26,7 +28,7 @@ export default function Home() {
 
   return (
     <>
-      {sections ? (
+      {sections?.length ? (
         <SectionList
           sections={sections}
           renderItem={({ item }) => <ItemList contact={item} />}

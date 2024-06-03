@@ -12,7 +12,10 @@ export default function ItemList({ contact }: ItemListProps) {
   return (
     <TouchableOpacity
       onPress={() =>
-        router.push({ pathname: "/chat", params: { name: contact.name } })
+        router.push({
+          pathname: "/chat",
+          params: { name: contact.name, email: contact.email },
+        })
       }
     >
       <Box padding="4">

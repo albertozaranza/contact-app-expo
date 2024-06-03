@@ -1,5 +1,6 @@
-import { firebaseAuth } from "@/firebaseConfig";
 import { Box, Flex, Text } from "native-base";
+
+import { firebaseAuth } from "@/firebaseConfig";
 
 type ChatMessageProps = {
   origin: string;
