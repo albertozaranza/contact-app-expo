@@ -1,50 +1,101 @@
-# Welcome to your Expo app 👋
+# ContactApp
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Bem-vindo ao ContactApp! Este é um aplicativo de chat desenvolvido com Expo, permitindo que você se conecte e converse com seus contatos de forma rápida e fácil.
 
-## Get started
+<img src="./assets/images/signin.png" width=25% height=25%>
+<img src="./assets/images/home.png" width=25% height=25%>
+<img src="./assets/images/chat.png" width=25% height=25%>
 
-1. Install dependencies
+## Índice
+
+- [Descrição](#descrição)
+- [Recursos](#recursos)
+- [Instalação](#instalação)
+- [Como Usar](#como-usar)
+- [Tecnologias Utilizadas](#tecnologias-utilizadas)
+- [Contribuição](#contribuição)
+- [Licença](#licença)
+- [Contato](#contato)
+
+## Descrição
+
+O ContactApp é um aplicativo móvel de mensagens instantâneas que permite que você se conecte com seus amigos, familiares e colegas de trabalho. Com uma interface amigável e intuitiva, o ContactApp oferece uma experiência de chat simplificada e eficiente.
+
+## Recursos
+
+- **Mensagens em Tempo Real**: Envie e receba mensagens instantaneamente.
+- **Lista de Contatos**: Veja todos os seus contatos em um único lugar.
+- **Autenticação Segura**: Faça login com segurança utilizando autenticação via Firebase.
+
+## Instalação
+
+Siga os passos abaixo para configurar e rodar o ContactApp no seu ambiente local:
+
+1. Clone o repositório:
 
    ```bash
-   npm install
+   git clone https://github.com/albertozaranza/contact-app-expo.git
    ```
 
-2. Start the app
+2. Navegue até o diretório do projeto:
 
    ```bash
-    npx expo start
+   cd contact-app-expo
    ```
 
-In the output, you'll find options to open the app in a
+3. Instale as dependências:
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+   ```bash
+   pnpm install
+   ```
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+4. Inicie o servidor de desenvolvimento do Expo:
 
-## Get a fresh project
+   ```bash
+   pnpm start
+   ```
 
-When you're ready, run:
+## Como Usar
 
-```bash
-npm run reset-project
-```
+1. Abra o aplicativo Expo Go no seu dispositivo móvel.
+2. Escaneie o QR code exibido no terminal ou na página do Expo.
+3. Explore o ContactApp e comece a conversar com seus contatos!
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## Tecnologias Utilizadas
 
-## Learn more
+- **Expo**: Framework para construção de aplicativos React Native.
+- **React Native**: Biblioteca para desenvolvimento de aplicativos móveis.
+- **Firebase**: Plataforma para autenticação e banco de dados em tempo real.
 
-To learn more about developing your project with Expo, look at the following resources:
+## Contribuição
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+Contribuições são bem-vindas! Se você deseja contribuir para o ContactApp, siga os passos abaixo:
 
-## Join the community
+1. Fork o repositório.
+2. Crie uma nova branch:
 
-Join our community of developers creating universal apps.
+   ```bash
+   git checkout -b minha-nova-feature
+   ```
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+3. Faça suas alterações e commit:
+
+   ```bash
+   git commit -m 'Adiciona nova feature'
+   ```
+
+4. Envie para o branch original:
+
+   ```bash
+   git push origin minha-nova-feature
+   ```
+
+5. Abra um Pull Request.
+
+## Licença
+
+Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+---
+
+Sinta-se à vontade para modificar conforme necessário para melhor atender ao seu projeto e informações específicas!
