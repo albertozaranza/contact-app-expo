@@ -18,7 +18,7 @@ export default function ItemList({ contact }: ItemListProps) {
         })
       }
     >
-      <Box padding="4">
+      <Box padding="4" backgroundColor="#fff">
         <Text fontSize="md">{contact.name}</Text>
         <Text color="gray.400">{contact.email}</Text>
       </Box>
