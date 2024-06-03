@@ -38,9 +38,10 @@ export default function AppLayout() {
         name="modal"
         options={{
           headerTitle: "Adicionar contato",
-          // presentation: "modal",
+          presentation: "modal",
         }}
       />
+      <Stack.Screen name="chat" />
     </Stack>
   );
 }

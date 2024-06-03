@@ -1,15 +1,23 @@
-import { Text, TouchableOpacity } from "react-native";
-import { Box } from "native-base";
+import { TouchableOpacity } from "react-native";
+import { Box, Text } from "native-base";
+import { router } from "expo-router";
+
+import { Contact } from "../@types/contact";
 
 type ItemListProps = {
-  email: string;
+  contact: Contact;
 };
 
-export default function ItemList({ email }: ItemListProps) {
+export default function ItemList({ contact }: ItemListProps) {
   return (
-    <TouchableOpacity>
+    <TouchableOpacity
+      onPress={() =>
+        router.push({ pathname: "/chat", params: { name: contact.name } })
+      }
+    >
       <Box padding="4">
-        <Text>{email}</Text>
+        <Text fontSize="md">{contact.name}</Text>
+        <Text color="gray.400">{contact.email}</Text>
       </Box>
     </TouchableOpacity>
   );

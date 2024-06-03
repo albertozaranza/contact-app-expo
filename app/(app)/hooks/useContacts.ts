@@ -1,13 +1,10 @@
 import { useMemo, useState } from "react";
+import { Alert } from "react-native";
 import { getDatabase, ref, push, onValue } from "firebase/database";
 
 import { firebaseAuth } from "@/firebaseConfig";
-import { Alert } from "react-native";
 
-type Contact = {
-  name: string;
-  email: string;
-};
+import { Contact } from "../@types/contact";
 
 export type UseContactsType = {
   sections: { title: string; data: Contact[] }[] | null;

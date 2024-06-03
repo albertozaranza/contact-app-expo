@@ -7,6 +7,7 @@ import useContacts from "./hooks/useContacts";
 import ItemList from "./components/ItemList";
 import ItemHeader from "./components/ItemHeader";
 import { router } from "expo-router";
+import { Contact } from "./@types/contact";
 
 export default function Home() {
   const { sections, isLoading, getContacts } = useContacts();
@@ -28,7 +29,7 @@ export default function Home() {
       {sections ? (
         <SectionList
           sections={sections}
-          renderItem={({ item }) => <ItemList email={item.email} />}
+          renderItem={({ item }) => <ItemList contact={item} />}
           keyExtractor={(item) => item.email}
           ItemSeparatorComponent={Divider}
           renderSectionHeader={({ section: { title } }) => (
