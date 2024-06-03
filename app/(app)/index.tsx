@@ -1,54 +1,41 @@
 import { useEffect } from "react";
-import { Text, View } from "react-native";
-import { getDatabase, ref, child, get, set } from "firebase/database";
-import { firebaseAuth } from "@/firebaseConfig";
-import { Button } from "native-base";
+import { Text } from "react-native";
+import { Flex, Fab, Icon, FlatList } from "native-base";
+import { AntDesign } from "@expo/vector-icons";
+
+import useContacts from "./hooks/useContacts";
 
 export default function Home() {
-  const writeUserData = () => {
-    const db = getDatabase();
+  const { contacts, createContact, getContacts } = useContacts();
 
-    if (firebaseAuth.currentUser?.email) {
-      set(ref(db, `contacts/${btoa(firebaseAuth.currentUser.email)}`), {
-        username: "contato",
-      });
-    }
-  };
-
-  const handleRealTimeDatabaseData = async () => {
-    const dbRef = ref(getDatabase());
-
-    if (firebaseAuth.currentUser?.email) {
-      try {
-        const snapshot = await get(
-          child(dbRef, `contacts/${btoa(firebaseAuth.currentUser.email)}`)
-        );
-
-        if (snapshot.exists()) {
-          console.log(snapshot.val());
-        } else {
-          console.log("No data available");
-        }
-      } catch (e) {
-        console.error(e);
-      }
-    }
-  };
+  const hasContact = contacts.length > 0;
 
   useEffect(() => {
-    handleRealTimeDatabaseData();
+    getContacts();
   }, []);
 
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "#ccc",
-      }}
-    >
-      <Button onPress={writeUserData}>Criar contato</Button>
-    </View>
+    <>
+      {hasContact ? (
+        <FlatList
+          data={contacts}
+          renderItem={({ item }) => <Text>{item.email}</Text>}
+          keyExtractor={(item) => item.email}
+        />
+      ) : (
+        <Flex flex={1} justify="center" align="center">
+          <Text>Não existem contatos cadastrados</Text>
+        </Flex>
+      )}
+      <Fab
+        onPress={() => createContact({ email: "jamille@teste.com" })}
+        renderInPortal={false}
+        shadow={2}
+        size="sm"
+        icon={<Icon color="white" as={AntDesign} name="plus" size="sm" />}
+        mb={8}
+        mr={4}
+      />
+    </>
   );
 }
