@@ -10,11 +10,15 @@ export default function AppLayout() {
   return (
     <Stack
       screenOptions={{
+        headerStyle: {
+          backgroundColor: "#0891b2",
+        },
         headerTitle: "Contatos",
+        headerTintColor: "#fff",
         headerRight: () => (
           <IconButton
             onPress={signOut}
-            color="primary.600"
+            colorScheme="dark"
             variant="ghost"
             _icon={{
               as: MaterialIcons,

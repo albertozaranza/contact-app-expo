@@ -1,26 +1,38 @@
 import { useEffect } from "react";
-import { Text } from "react-native";
-import { Flex, Fab, Icon, FlatList } from "native-base";
+import { ActivityIndicator, Text } from "react-native";
+import { Flex, Fab, Icon, SectionList, Divider } from "native-base";
 import { AntDesign } from "@expo/vector-icons";
 
 import useContacts from "./hooks/useContacts";
+import ItemList from "./components/ItemList";
+import ItemHeader from "./components/ItemHeader";
 
 export default function Home() {
-  const { contacts, createContact, getContacts } = useContacts();
-
-  const hasContact = contacts.length > 0;
+  const { sections, isLoading, createContact, getContacts } = useContacts();
 
   useEffect(() => {
     getContacts();
   }, []);
 
+  if (isLoading)
+    return (
+      <Flex flex={1} justify="center" align="center">
+        <ActivityIndicator />
+        <Text>Carregando</Text>
+      </Flex>
+    );
+
   return (
     <>
-      {hasContact ? (
-        <FlatList
-          data={contacts}
-          renderItem={({ item }) => <Text>{item.email}</Text>}
+      {sections ? (
+        <SectionList
+          sections={sections}
+          renderItem={({ item }) => <ItemList email={item.email} />}
           keyExtractor={(item) => item.email}
+          ItemSeparatorComponent={Divider}
+          renderSectionHeader={({ section: { title } }) => (
+            <ItemHeader title={title} />
+          )}
         />
       ) : (
         <Flex flex={1} justify="center" align="center">
@@ -28,7 +40,9 @@ export default function Home() {
         </Flex>
       )}
       <Fab
-        onPress={() => createContact({ email: "jamille@teste.com" })}
+        onPress={() =>
+          createContact({ name: "Maria", email: "maria@teste.com" })
+        }
         renderInPortal={false}
         shadow={2}
         size="sm"
