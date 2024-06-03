@@ -2,9 +2,13 @@
 
 Bem-vindo ao ContactApp! Este é um aplicativo de chat desenvolvido com Expo, permitindo que você se conecte e converse com seus contatos de forma rápida e fácil.
 
-<img src="./assets/images/signin.png" width=25% height=25%>
-<img src="./assets/images/home.png" width=25% height=25%>
-<img src="./assets/images/chat.png" width=25% height=25%>
+<div style="display: flex; justify-content: space-around;">
+   <img src="./assets/images/signin.png" width=25% height=25%>
+   <img src="./assets/images/home.png" width=25% height=25%>
+   <img src="./assets/images/chat.png" width=25% height=25%>
+</div>
+
+
 
 ## Índice
 
