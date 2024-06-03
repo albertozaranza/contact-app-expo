@@ -53,7 +53,7 @@ export function SessionProvider(props: React.PropsWithChildren) {
     try {
       await signInWithEmailAndPassword(firebaseAuth, email, password);
 
-      router.replace("/");
+      router.replace("/home");
     } catch (e) {
       console.error(e);
     }
@@ -67,7 +67,7 @@ export function SessionProvider(props: React.PropsWithChildren) {
     try {
       await createUserWithEmailAndPassword(firebaseAuth, email, password);
 
-      router.replace("/");
+      router.replace("/home");
     } catch (e) {
       console.error(e);
     }

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 import { ActivityIndicator, Text } from "react-native";
 import { Flex, Fab, Icon, SectionList, Divider } from "native-base";
 import { AntDesign } from "@expo/vector-icons";
@@ -6,11 +6,12 @@ import { AntDesign } from "@expo/vector-icons";
 import useContacts from "./hooks/useContacts";
 import ItemList from "./components/ItemList";
 import ItemHeader from "./components/ItemHeader";
+import { router } from "expo-router";
 
 export default function Home() {
-  const { sections, isLoading, createContact, getContacts } = useContacts();
+  const { sections, isLoading, getContacts } = useContacts();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     getContacts();
   }, []);
 
@@ -40,9 +41,7 @@ export default function Home() {
         </Flex>
       )}
       <Fab
-        onPress={() =>
-          createContact({ name: "Maria", email: "maria@teste.com" })
-        }
+        onPress={() => router.push("/modal")}
         renderInPortal={false}
         shadow={2}
         size="sm"

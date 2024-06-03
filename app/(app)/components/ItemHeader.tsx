@@ -8,7 +8,7 @@ type ItemHeaderProps = {
 export default function ItemHeader({ title }: ItemHeaderProps) {
   return (
     <Box padding={4} backgroundColor="primary.500">
-      <Text>{title}</Text>
+      <Text style={{ color: "#fff" }}>{title}</Text>
     </Box>
   );
 }

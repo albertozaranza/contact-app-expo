@@ -13,20 +13,34 @@ export default function AppLayout() {
         headerStyle: {
           backgroundColor: "#0891b2",
         },
-        headerTitle: "Contatos",
+
         headerTintColor: "#fff",
-        headerRight: () => (
-          <IconButton
-            onPress={signOut}
-            colorScheme="dark"
-            variant="ghost"
-            _icon={{
-              as: MaterialIcons,
-              name: "logout",
-            }}
-          />
-        ),
       }}
-    />
+    >
+      <Stack.Screen
+        name="home"
+        options={{
+          headerTitle: "Contatos",
+          headerRight: () => (
+            <IconButton
+              onPress={signOut}
+              colorScheme="dark"
+              variant="ghost"
+              _icon={{
+                as: MaterialIcons,
+                name: "logout",
+              }}
+            />
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="modal"
+        options={{
+          headerTitle: "Adicionar contato",
+          // presentation: "modal",
+        }}
+      />
+    </Stack>
   );
 }
